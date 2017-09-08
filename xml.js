@@ -29,7 +29,6 @@ var util = require('util');
 
 var isArray = Array.isArray || util.isArray; // support for older Node.js
 
-var xml_header = '<?xml version="1.0"?>';
 var sort_args = null;
 var re_valid_tag_name  = /^\w[\w\-\:\.]*$/;
 
@@ -407,9 +406,6 @@ XML.prototype.compose = function(indent_string, eol) {
 			xml += '<' + this.piNodeList[idx] + '>' + eol;
 		}
 	}
-	else {
-		xml += xml_header + eol;
-	}
 	
 	if (this.dtdNodeList.length) {
 		for (var idx = 0, len = this.dtdNodeList.length; idx < len; idx++) {
@@ -500,7 +496,6 @@ var compose_xml = exports.stringify = function compose_xml(node, name, indent, i
 	// and setup the XML header (PI node)
 	if (!indent) {
 		indent = 0;
-		xml = xml_header + eol;
 		
 		if (!name) {
 			// no name provided, assume content is wrapped in it
